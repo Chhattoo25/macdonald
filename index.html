@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="index.css">
+<body>
+    <select name="" id="food">
+        <option value="null"></option>
+        <option value="chicken">chicken leg </option>
+        <option value="pizaa">pizaa</option>
+        <option value="momos">momos</option>
+        <option value="coke">coke</option>
+    </select>
+    <button onclick=orderfood()>order</button>
+    <div id="imagediv">
+
+    </div>
+</body>
+</html>
+<script>
+    function orderfood()
+    {
+        document.getElementById("imagediv").innerHTML=null;
+     let food =get("food");
+     //console.log("food",food);
+     const status='open'
+     let foodpromise =new Promise(function(resolve,reject)
+     {
+//let time=Math.random()*10000;
+
+         if(status==="close")
+         {
+            
+           reject('shop closed');
+
+           let image =document.createElement("img")
+           image.src="https://i.inews.co.uk/content/uploads/2021/12/PRI_215999770.jpg"
+           document.querySelector("#imagediv").append(image);
+       
+
+         }
+         else{
+             setTimeout(function ()
+             {
+                 resolve(food)
+             },3000)
+         }
+        });
+     foodpromise.then(function(res)
+     {
+         console.log(`${res} is ready`)
+         if(res=="chicken")
+         {
+            let image =document.createElement("img")
+           image.src="https://i.ytimg.com/vi/HW2uHjN7Dq0/maxresdefault.jpg"
+           document.querySelector("#imagediv").append(image);
+        
+         }
+        else if(res=="pizza")
+         {
+            let image =document.createElement("img")
+           image.src="https://img.onmanorama.com/content/dam/mm/en/food/features/images/2021/10/17/pizza.jpg"
+           document.querySelector("#imagediv").append(image);
+        
+         }
+        else if(res=="momos")
+         {
+            let image =document.createElement("img")
+           image.src="https://www.tiffinboxfood.com/wp-content/uploads/2020/03/chicken-momo-1.jpg"
+           document.querySelector("#imagediv").append(image);
+        
+         }
+        else if(res=="coke")
+         {
+            let image =document.createElement("img")
+           image.src="https://www.eatthis.com/wp-content/uploads/sites/4/media/images/ext/108098914/coca-cola-soda-ice.jpg?fit=1024%2C750&ssl=1"
+           document.querySelector("#imagediv").append(image);
+        
+         }
+     })
+
+    }
+    function get(id)
+    {
+        return document.getElementById(id).value;
+    }
+</script>
